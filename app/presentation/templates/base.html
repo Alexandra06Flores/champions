@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Champions League</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4f6fb; color: #1a1a2e; }
+    nav { background: #0b1f4d; padding: 14px 30px; }
+    nav a { color: #fff; text-decoration: none; margin-right: 20px; font-weight: bold; }
+    main { max-width: 1000px; margin: 25px auto; padding: 0 20px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+    th { background: #0b1f4d; color: #fff; }
+    input[type=number] { width: 50px; }
+    button { background: #0b1f4d; color: #fff; border: 0; padding: 6px 12px; cursor: pointer; }
+    .ok { background: #d4edda; padding: 10px; margin-bottom: 10px; }
+    .error { background: #f8d7da; padding: 10px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('main.index') }}">Partidos</a>
+    <a href="{{ url_for('main.predictions') }}">Predicciones</a>
+  </nav>
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat, msg in messages %}<div class="{{ cat }}">{{ msg }}</div>{% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

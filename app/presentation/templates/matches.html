@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Partidos de la Champions League</h2>
+<table>
+  <tr><th>Fecha</th><th>Fase</th><th>Local</th><th>Visitante</th><th>Tu prediccion</th></tr>
+  {% for m in matches %}
+  <tr>
+    <td>{{ m.match_date.strftime('%d/%m/%Y %H:%M') }}</td>
+    <td>{{ m.stage }}</td>
+    <td>{{ m.home_team }}</td>
+    <td>{{ m.away_team }}</td>
+    <td>
+      <form method="post" action="{{ url_for('main.predictions') }}">
+        <input type="hidden" name="match_id" value="{{ m.id }}">
+        <select name="winner">
+          <option value="local">Gana local</option>
+          <option value="empate">Empate</option>
+          <option value="visitante">Gana visitante</option>
+        </select>
+        <input type="number" name="home_score" min="0" max="20" value="0" required> -
+        <input type="number" name="away_score" min="0" max="20" value="0" required>
+        <button type="submit">Guardar</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

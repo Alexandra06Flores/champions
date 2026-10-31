@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Predicciones registradas</h2>
+<table>
+  <tr><th>Partido</th><th>Resultado</th><th>Marcador</th><th>Registrada</th></tr>
+  {% for p in predictions %}
+  <tr>
+    <td>{{ p.home_team }} vs {{ p.away_team }}</td>
+    <td>{{ p.winner|capitalize }}</td>
+    <td>{{ p.home_score }} - {{ p.away_score }}</td>
+    <td>{{ p.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="4">Aun no hay predicciones.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}
